@@ -49,6 +49,10 @@
 #include "LuaEngine.h"
 #endif /* ENABLE_ELUNA */
 
++// Playerbot mod:
++#include "playerbot/PlayerbotMgr.h"
++// End playerbot mod
++
 // config option SkipCinematics supported values
 enum CinematicsSkipMode
 {
