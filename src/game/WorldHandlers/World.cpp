@@ -75,6 +75,11 @@
 #include "LuaEngine.h"
 #endif /* ENABLE_ELUNA */
 
+// Playerbot mod
+#include "playerbot/config.h"
+// End playerbot mod
+
+
 INSTANTIATE_SINGLETON_1(World);
 
 extern void LoadGameObjectModelList();
@@ -1366,6 +1371,8 @@ void World::SetInitialWorldSettings()
     sEluna->RunScripts();
     sEluna->OnConfigLoad(false); // Must be done after Eluna is initialized and scripts have run.
 #endif
+	//bot
+	PlayerbotMgr::SetInitialWorldSettings();
 
     sLog.outString("WORLD: World initialized");
     sLog.outString();

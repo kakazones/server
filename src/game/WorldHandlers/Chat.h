@@ -580,6 +580,9 @@ class MANGOS_DLL_SPEC ChatHandler
         bool HandleRepairitemsCommand(char* args);
         bool HandleStableCommand(char* args);
         bool HandleWaterwalkCommand(char* args);
+		// Playerbot mod
+		bool HandlePlayerbotCommand(char* args);
+		// End playerbot mod
         bool HandleQuitCommand(char* args);
 
         bool HandleMmapPathCommand(char* args);
