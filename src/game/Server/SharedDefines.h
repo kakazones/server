@@ -2,7 +2,7 @@
  * MaNGOS is a full featured server for World of Warcraft, supporting
  * the following clients: 1.12.x, 2.4.3, 3.3.5a, 4.3.4a and 5.4.8
  *
- * Copyright (C) 2005-2014  MaNGOS project <http://getmangos.eu>
+ * Copyright (C) 2005-2015  MaNGOS project <http://getmangos.eu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -308,7 +308,7 @@ enum SpellAttributes
     SPELL_ATTR_CANT_USED_IN_COMBAT              = 0x10000000,            // 28 Can not be used in combat
     SPELL_ATTR_UNAFFECTED_BY_INVULNERABILITY    = 0x20000000,            // 29 unaffected by invulnerability (hmm possible not...)
     SPELL_ATTR_UNK30                            = 0x40000000,            // 30 breakable by damage?
-    SPELL_ATTR_CANT_CANCEL                      = 0x80000000,            // 31 positive aura can't be canceled
+    SPELL_ATTR_CANT_CANCEL                      = 0x80000000             // 31 positive aura can't be canceled
 };
 
 enum SpellAttributesEx
@@ -429,7 +429,7 @@ enum SpellAttributesEx4
     SPELL_ATTR_EX4_UNK5                         = 0x00000020,            // 5
     SPELL_ATTR_EX4_NOT_STEALABLE                = 0x00000040,            // 6 although such auras might be dispellable, they can not be stolen
     SPELL_ATTR_EX4_UNK7                         = 0x00000080,            // 7
-    SPELL_ATTR_EX4_UNK8                         = 0x00000100,            // 8
+    SPELL_ATTR_EX4_STACK_DOT_MODIFIER           = 0x00000100,            // 8
     SPELL_ATTR_EX4_UNK9                         = 0x00000200,            // 9
     SPELL_ATTR_EX4_SPELL_VS_EXTEND_COST         = 0x00000400,            // 10
     SPELL_ATTR_EX4_UNK11                        = 0x00000800,            // 11

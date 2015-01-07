@@ -2,7 +2,7 @@
  * MaNGOS is a full featured server for World of Warcraft, supporting
  * the following clients: 1.12.x, 2.4.3, 3.3.5a, 4.3.4a and 5.4.8
  *
- * Copyright (C) 2005-2014  MaNGOS project <http://getmangos.eu>
+ * Copyright (C) 2005-2015  MaNGOS project <http://getmangos.eu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -693,13 +693,19 @@ void Creature::RegeneratePower()
     // Apply modifiers (if any)
     AuraList const& ModPowerRegenAuras = GetAurasByType(SPELL_AURA_MOD_POWER_REGEN);
     for(AuraList::const_iterator i = ModPowerRegenAuras.begin(); i != ModPowerRegenAuras.end(); ++i)
-        if ((*i)->GetModifier()->m_miscvalue == int32(powerType))
-            addValue += (*i)->GetModifier()->m_amount;
+    {
+        Modifier const* modifier = (*i)->GetModifier();
+        if (modifier->m_miscvalue == int32(powerType))
+            { addValue += modifier->m_amount; }
+    }
 
     AuraList const& ModPowerRegenPCTAuras = GetAurasByType(SPELL_AURA_MOD_POWER_REGEN_PERCENT);
     for(AuraList::const_iterator i = ModPowerRegenPCTAuras.begin(); i != ModPowerRegenPCTAuras.end(); ++i)
-        if ((*i)->GetModifier()->m_miscvalue == int32(powerType))
-            addValue *= ((*i)->GetModifier()->m_amount + 100) / 100.0f;
+    {
+        Modifier const* modifier = (*i)->GetModifier();
+        if (modifier->m_miscvalue == int32(powerType))
+            { addValue *= (modifier->m_amount + 100) / 100.0f; }
+    }
 
     ModifyPower(powerType, int32(addValue));
 }
@@ -2258,7 +2264,7 @@ time_t Creature::GetRespawnTimeEx() const
     if (m_respawnTime > now)                                // dead (no corpse)
         { return m_respawnTime; }
     else if (m_corpseRemoveTime > time(NULL))               // dead (corpse)
-    { return m_corpseRemoveTime + m_respawnDelay; }
+        { return m_corpseRemoveTime + m_respawnDelay; }
     else
         { return now; }
 }

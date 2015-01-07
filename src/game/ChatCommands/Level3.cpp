@@ -2,7 +2,7 @@
  * MaNGOS is a full featured server for World of Warcraft, supporting
  * the following clients: 1.12.x, 2.4.3, 3.3.5a, 4.3.4a and 5.4.8
  *
- * Copyright (C) 2005-2014  MaNGOS project <http://getmangos.eu>
+ * Copyright (C) 2005-2015  MaNGOS project <http://getmangos.eu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -6507,8 +6507,10 @@ bool ChatHandler::HandleSendMessageCommand(char* args)
     if (!*args)
         { return false; }
 
+    WorldSession* rPlayerSession = rPlayer->GetSession();
+
     ///- Check that he is not logging out.
-    if (rPlayer->GetSession()->isLogingOut())
+    if (rPlayerSession->isLogingOut())
     {
         SendSysMessage(LANG_PLAYER_NOT_FOUND);
         SetSentErrorMessage(true);
@@ -6517,8 +6519,8 @@ bool ChatHandler::HandleSendMessageCommand(char* args)
 
     ///- Send the message
     // Use SendAreaTriggerMessage for fastest delivery.
-    rPlayer->GetSession()->SendAreaTriggerMessage("%s", args);
-    rPlayer->GetSession()->SendAreaTriggerMessage("|cffff0000[Message from administrator]:|r");
+    rPlayerSession->SendAreaTriggerMessage("%s", args);
+    rPlayerSession->SendAreaTriggerMessage("|cffff0000[Message from administrator]:|r");
 
     // Confirmation message
     std::string nameLink = GetNameLink(rPlayer);

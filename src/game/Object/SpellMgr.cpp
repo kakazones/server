@@ -2,7 +2,7 @@
  * MaNGOS is a full featured server for World of Warcraft, supporting
  * the following clients: 1.12.x, 2.4.3, 3.3.5a, 4.3.4a and 5.4.8
  *
- * Copyright (C) 2005-2014  MaNGOS project <http://getmangos.eu>
+ * Copyright (C) 2005-2015  MaNGOS project <http://getmangos.eu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -1461,11 +1461,11 @@ void SpellMgr::LoadSpellBonuses()
         sbe.one_hand_direct_damage_done = fields[5].GetFloat();
         sbe.two_hand_direct_damage_done = fields[6].GetFloat();
         sbe.direct_damage_taken = fields[7].GetFloat();
-        sbe.one_hand_direct_damage_taken = fields[7].GetFloat();
-        sbe.two_hand_direct_damage_taken = fields[8].GetFloat();
-        sbe.dot_damage    = fields[9].GetFloat();
-        sbe.ap_bonus      = fields[10].GetFloat();
-        sbe.ap_dot_bonus   = fields[11].GetFloat();
+        sbe.one_hand_direct_damage_taken = fields[8].GetFloat();
+        sbe.two_hand_direct_damage_taken = fields[9].GetFloat();
+        sbe.dot_damage    = fields[10].GetFloat();
+        sbe.ap_bonus      = fields[11].GetFloat();
+        sbe.ap_dot_bonus   = fields[12].GetFloat();
 
         bool need_dot = false;
         bool need_direct = false;

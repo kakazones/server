@@ -2,7 +2,7 @@
  * MaNGOS is a full featured server for World of Warcraft, supporting
  * the following clients: 1.12.x, 2.4.3, 3.3.5a, 4.3.4a and 5.4.8
  *
- * Copyright (C) 2005-2014  MaNGOS project <http://getmangos.eu>
+ * Copyright (C) 2005-2015  MaNGOS project <http://getmangos.eu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -770,7 +770,7 @@ void World::LoadConfigSettings(bool reload)
     setConfig(CONFIG_UINT32_TIMERBAR_FIRE_MAX,        "TimerBar.Fire.Max", 1);
 
     setConfig(CONFIG_UINT32_LOG_WHISPERS,             "LogWhispers", 1);
-    
+
     setConfig(CONFIG_BOOL_PET_UNSUMMON_AT_MOUNT,      "PetUnsummonAtMount", false);
 
     m_relocation_ai_notify_delay = sConfig.GetIntDefault("Visibility.AIRelocationNotifyDelay", 1000u);
@@ -1804,7 +1804,7 @@ BanReturn World::BanAccount(BanMode mode, std::string nameOrIP, uint32 duration_
                                    account, duration_secs, safe_author.c_str(), reason.c_str());
         }
 
-        if (WorldSession* sess =FindSession(account))
+        if (WorldSession* sess = FindSession(account))
             if (std::string(sess->GetPlayerName()) != author)
                 { sess->KickPlayer(); }
     }

@@ -2,7 +2,7 @@
  * MaNGOS is a full featured server for World of Warcraft, supporting
  * the following clients: 1.12.x, 2.4.3, 3.3.5a, 4.3.4a and 5.4.8
  *
- * Copyright (C) 2005-2014  MaNGOS project <http://getmangos.eu>
+ * Copyright (C) 2005-2015  MaNGOS project <http://getmangos.eu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -50,6 +50,10 @@ extern int m_ServiceStatus;
 /// Heartbeat for the World
 void WorldRunnable::run()
 {
+#ifdef ENABLE_ELUNA
+    sEluna->OnStartup();
+#endif /* ENABLE_ELUNA */
+
     uint32 realCurrTime = 0;
     uint32 realPrevTime = WorldTimer::tick();
 
@@ -90,6 +94,10 @@ void WorldRunnable::run()
             Sleep(1000);
 #endif
     }
+
+#ifdef ENABLE_ELUNA
+    sEluna->OnShutdown();
+#endif /* ENABLE_ELUNA */
 
     sWorld.KickAll();                                       // save and kick all players
     sWorld.UpdateSessions(1);                               // real players unload required UpdateSessions call

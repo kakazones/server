@@ -2,7 +2,7 @@
  * MaNGOS is a full featured server for World of Warcraft, supporting
  * the following clients: 1.12.x, 2.4.3, 3.3.5a, 4.3.4a and 5.4.8
  *
- * Copyright (C) 2005-2014  MaNGOS project <http://getmangos.eu>
+ * Copyright (C) 2005-2015  MaNGOS project <http://getmangos.eu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -94,12 +94,14 @@ CreatureEventAI::CreatureEventAI(Creature* c) : CreatureAI(c),
     if (creatureEventsItr != sEventAIMgr.GetCreatureEventAIMap().end())
     {
         uint32 events_count = 0;
-        for (CreatureEventAI_Event_Vec::const_iterator i = (*creatureEventsItr).second.begin(); i != (*creatureEventsItr).second.end(); ++i)
+
+        const CreatureEventAI_Event_Vec &creatureEvent = creatureEventsItr->second;
+        for (CreatureEventAI_Event_Vec::const_iterator i = creatureEvent.begin(); i != creatureEvent.end(); ++i)
         {
             // Debug check
 #ifndef MANGOS_DEBUG
-            if ((*i).event_flags & EFLAG_DEBUG_ONLY)
-                { continue; }
+            if (i->event_flags & EFLAG_DEBUG_ONLY)
+                continue;
 #endif
 
             ++events_count;
@@ -1302,7 +1304,7 @@ void CreatureEventAI::SpellHit(Unit* pUnit, const SpellEntry* pSpell)
             // If spell id matches (or no spell id) & if spell school matches (or no spell school)
             if (!i->Event.spell_hit.spellId || pSpell->Id == i->Event.spell_hit.spellId)
                 if (GetSchoolMask(pSpell->School) & i->Event.spell_hit.schoolMask)
-                    ProcessEvent(*i, pUnit);
+                    { ProcessEvent(*i, pUnit); }
 }
 
 void CreatureEventAI::UpdateAI(const uint32 diff)

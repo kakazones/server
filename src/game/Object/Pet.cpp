@@ -2,7 +2,7 @@
  * MaNGOS is a full featured server for World of Warcraft, supporting
  * the following clients: 1.12.x, 2.4.3, 3.3.5a, 4.3.4a and 5.4.8
  *
- * Copyright (C) 2005-2014  MaNGOS project <http://getmangos.eu>
+ * Copyright (C) 2005-2015  MaNGOS project <http://getmangos.eu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -1859,6 +1859,7 @@ void Pet::ToggleAutocast(uint32 spellid, bool apply)
         { return; }
 
     PetSpellMap::iterator itr = m_spells.find(spellid);
+    PetSpell &petSpell = itr->second;
 
     uint32 i;
 
@@ -1871,11 +1872,11 @@ void Pet::ToggleAutocast(uint32 spellid, bool apply)
         {
             m_autospells.push_back(spellid);
 
-            if (itr->second.active != ACT_ENABLED)
+            if (petSpell.active != ACT_ENABLED)
             {
-                itr->second.active = ACT_ENABLED;
-                if (itr->second.state != PETSPELL_NEW)
-                    { itr->second.state = PETSPELL_CHANGED; }
+                petSpell.active = ACT_ENABLED;
+                if (petSpell.state != PETSPELL_NEW)
+                    { petSpell.state = PETSPELL_CHANGED; }
             }
         }
     }
@@ -1888,11 +1889,11 @@ void Pet::ToggleAutocast(uint32 spellid, bool apply)
         if (i < m_autospells.size())
         {
             m_autospells.erase(itr2);
-            if (itr->second.active != ACT_DISABLED)
+            if (petSpell.active != ACT_DISABLED)
             {
-                itr->second.active = ACT_DISABLED;
-                if (itr->second.state != PETSPELL_NEW)
-                    { itr->second.state = PETSPELL_CHANGED; }
+                petSpell.active = ACT_DISABLED;
+                if (petSpell.state != PETSPELL_NEW)
+                    { petSpell.state = PETSPELL_CHANGED; }
             }
         }
     }

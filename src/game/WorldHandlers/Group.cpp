@@ -2,7 +2,7 @@
  * MaNGOS is a full featured server for World of Warcraft, supporting
  * the following clients: 1.12.x, 2.4.3, 3.3.5a, 4.3.4a and 5.4.8
  *
- * Copyright (C) 2005-2014  MaNGOS project <http://getmangos.eu>
+ * Copyright (C) 2005-2015  MaNGOS project <http://getmangos.eu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -312,7 +312,7 @@ bool Group::AddMember(ObjectGuid guid, const char* name, uint8 joinMethod)
 
         // quest related GO state dependent from raid membership
         if (isRaidGroup())
-            player->UpdateForQuestWorldObjects();
+            { player->UpdateForQuestWorldObjects(); }
 
         if(isInLFG())
         {
@@ -1011,7 +1011,7 @@ void Group::EndRoll()
 void Group::CountTheRoll(Rolls::iterator& rollI)
 {
     Roll* roll = *rollI;
-    
+
 
     if (!roll->isValid())                                   // is loot already deleted ?
     {
@@ -1055,7 +1055,7 @@ void Group::CountTheRoll(Rolls::iterator& rollI)
                     item->is_looted = true;
                     roll->getLoot()->NotifyItemRemoved(roll->itemSlot);
                     --roll->getLoot()->unlootedCount;
-                    Item* newitem = player->StoreNewItem(dest, roll->itemid, true, item->randomPropertyId);                    
+                    Item* newitem = player->StoreNewItem(dest, roll->itemid, true, item->randomPropertyId);
                     player->SendNewItem(newitem, uint32(item->count), false, false, true);
 
                     /// Warn players about the loot status on the corpse.
@@ -1110,7 +1110,7 @@ void Group::CountTheRoll(Rolls::iterator& rollI)
                 {
                     item->is_looted = true;
                     roll->getLoot()->NotifyItemRemoved(roll->itemSlot);
-                    --roll->getLoot()->unlootedCount;                    
+                    --roll->getLoot()->unlootedCount;
                     Item* newitem = player->StoreNewItem(dest, roll->itemid, true, item->randomPropertyId);
                     player->SendNewItem(newitem, uint32(item->count), false, false, true);
 

@@ -2,7 +2,7 @@
  * MaNGOS is a full featured server for World of Warcraft, supporting
  * the following clients: 1.12.x, 2.4.3, 3.3.5a, 4.3.4a and 5.4.8
  *
- * Copyright (C) 2005-2014  MaNGOS project <http://getmangos.eu>
+ * Copyright (C) 2005-2015  MaNGOS project <http://getmangos.eu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -571,9 +571,10 @@ uint32 WorldSession::getDialogStatus(Player* pPlayer, Object* questgiver, uint32
             { dialogStatus = dialogStatusNew; }
     }
 
+    // check markings for quest-giver
     for (QuestRelationsMap::const_iterator itr = rbounds.first; itr != rbounds.second; ++itr)
     {
-        uint32 dialogStatusNew = 0;
+        uint32 dialogStatusNew = DIALOG_STATUS_NONE;
         uint32 quest_id = itr->second;
         Quest const* pQuest = sObjectMgr.GetQuestTemplate(quest_id);
 
@@ -657,7 +658,7 @@ void WorldSession::HandleQuestgiverStatusMultipleQuery(WorldPacket& /*recvPacket
 
             dialogStatus = sScriptMgr.GetDialogStatus(_player, questgiver);
 
-            if (dialogStatus > 6)
+            if (dialogStatus == DIALOG_STATUS_UNDEFINED)
                 { dialogStatus = getDialogStatus(_player, questgiver, DIALOG_STATUS_NONE); }
 
             data << questgiver->GetObjectGuid();
